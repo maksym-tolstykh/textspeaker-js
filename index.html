@@ -6,35 +6,69 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    
+
 </head>
 
 <body>
-    <p>Воспроизвести звуки.</p>
-    <textarea class="" cols="30" rows="10" placeholder="Type here..."></textarea>
-    <br>
-    <!-- 
-    <select id="voices" class="form-select bg-secondary text-light"></select>
-    <div>
-        <p class="lead">Volume</p>
-        <input type="range" min="0" max="1" value="1" step="0.1" id="volume" />
-        <span id="volume-label">1</span>
+    <div class="wrapper">
+        <p>Зачитать текст</p>
+        <textarea class="" cols="30" rows="10" placeholder="Type here..."></textarea>
+        <br>
+
+        <select id="voices" class="form-select bg-secondary text-light"></select>
+        <div class="input_container">
+            <div>
+                <p class="lead">Volume</p>
+                <input title="does't work in real time" type="range" min="0" max="1" value="1" step="0.1" id="volume" />
+                <span id="volume-label">1</span>
+            </div>
+            <div>
+                <p class="lead">Rate</p>
+                <input title="does't work in real time" type="range" min="0.1" max="10" value="1" id="rate" step="0.1" />
+                <span title="does't work in real time" id="rate-label">1</span>
+            </div>
+            <div>
+                <p class="lead">Pitch</p>
+                <input title="does't work in real time" type="range" min="0" max="2" value="1" step="0.1" id="pitch" />
+                <span id="pitch-label" class="ms-2">1</span>
+            </div>
+        </div>
+        <div class="button_container">
+            <button id="start">Включить</button>
+            <button id="pause">Пауза</button>
+            <button id="resume">Продолжить</button>
+            <button id="cancel">Остановить</button>
+        </div>
     </div>
-    <div>
-        <p class="lead">Rate</p>
-        <input type="range" min="0.1" max="10" value="1" id="rate" step="0.1" />
-        <span id="rate-label">1</span>
-    </div>
-    <div>
-        <p class="lead">Pitch</p>
-        <input type="range" min="0" max="2" value="1" step="0.1" id="pitch" />
-        <span id="pitch-label" class="ms-2">1</span>
-    </div> -->
-    <button id="start">Произнести вслух</button>
-    <button id="pause" >Pause</button>
-    <button id="resume">Resume</button>
-    <button id="cancel">Cancel</button>
 </body>
+<style>
+    .wrapper {
+        width: 500px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        margin: 0 auto;
+
+    }
+    textarea{
+        width: 100%;
+        min-height: 270px;
+    }
+
+    .input_container {
+        display: flex;
+        justify-content: space-between;
+        width: 100%;
+    }
+    .button_container{
+        margin-top: 25px;
+    }
+
+    .button_container button{
+        width: 100px;
+    }
+</style>
 <script src="./main.js" defer></script>
 
 </html>

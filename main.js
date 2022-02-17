@@ -1,96 +1,91 @@
-//let speech = new SpeechSynthesisUtterance();
-
-//speech.lang = "ru-RU";
-
 let voices = [];
 let defaultVoice;
-// // Volume input
-// document.querySelector("#volume").addEventListener("input", () => {
-//     const volume = document.querySelector("#volume").value;
 
-//     speech.volume = volume;
+let volumeValue = 1;
+let pitchValue = 1;
+let rateValue = 1;
 
-//     document.querySelector("#volume-label").innerHTML = volume;
-// });
+// Volume input
+document.querySelector("#volume").addEventListener("input", () => {
+    const volume = document.querySelector("#volume").value;
 
-// // Rate input
-// document.querySelector("#rate").addEventListener("input", () => {
-//     const pitch = document.querySelector("#rate").value;
+    volumeValue = volume;
 
-//     speech.pitch = pitch;
+    document.querySelector("#volume-label").innerHTML = volume;
+});
 
-//     document.querySelector("#rate-label").innerHTML = pitch;
-// });
+// Rate input
+document.querySelector("#rate").addEventListener("input", () => {
+    const pitch = document.querySelector("#rate").value;
 
-// // Pitch input
-// document.querySelector("#pitch").addEventListener("input", () => {
-//     const rate = document.querySelector("#pitch").value;
+    pitchValue = pitch;
 
-//     speech.rate = rate;
+    document.querySelector("#rate-label").innerHTML = pitch;
+});
 
-//     document.querySelector("#pitch-label").innerHTML = rate;
-// });
+// Pitch input
+document.querySelector("#pitch").addEventListener("input", () => {
+    const rate = document.querySelector("#pitch").value;
+
+    rateValue = rate;
+
+    document.querySelector("#pitch-label").innerHTML = rate;
+});
 
 
 // Voice
 window.speechSynthesis.onvoiceschanged = () => {
 
     voices = window.speechSynthesis.getVoices();
-
-    // speech.voice = voices[0];
-
-    // let voiceSelect = document.querySelector("#voices");
-    // voices.forEach((voice, i) => (voiceSelect.options[i] = new Option(voice.name, i)));
-
-    defaultVoice = voices.find((voice) => voice.name === "Google русский");
+    defaultVoice = voices[0];
+    let voiceSelect = document.querySelector("#voices");
+    voices.forEach((voice, i) => (voiceSelect.options[i] = new Option(voice.name, i)));
+    
+    
+    //defaultVoice = voices.find((voice) => voice.name === "Google русский"); //test
 }
 
-// document.querySelector("#voices").addEventListener("change", () => {
-//     speech.voice = voices[document.querySelector("#voices").value];
-// })
+document.querySelector("#voices").addEventListener("change", (e) => {
+     defaultVoice = voices[e.target.value];
+})
 
 
 // Talk
 document.querySelector("#start").addEventListener("click", () => {
-    //speech.text = document.querySelector("textarea").value;
     const textContent = document.querySelector("textarea").value;
     const splitText = textContent.split(".");
-    //speech.text = splitText;
+
     splitText.forEach((text) => {
-             const trimmed = text.trim();
-            // speech.text = trimmed;
-             //console.log(speech);
-             if (trimmed) {
-                const U = test(trimmed);
-                console.log(U);
-                window.speechSynthesis.speak(U);
-            }
-        //console.log(speech);
 
+        const newText = text.split(",");
+
+            newText.forEach((nText)=>{
+                const trimmed = nText.trim();
+
+                if (trimmed) {
+                   const U = speekText(trimmed);
+                   console.log(U);
+                   window.speechSynthesis.speak(U);
+               }
+            })
     })
-    // speech.volume = 1;
-    // speech.rate = 1;
-    // speech.pitch = 1;
-
 });
 
-const test = (text) => {
-    let newSpeech = new SpeechSynthesisUtterance(text)
+const speekText = (text) => {
+    let speech = new SpeechSynthesisUtterance(text)
     
-    newSpeech.voice = defaultVoice;
-    newSpeech.lang = defaultVoice.lang;
-    newSpeech.volume = 1;
-    newSpeech.rate = 1;
-    newSpeech.pitch = 1;
+    speech.voice = defaultVoice;
+    speech.lang = defaultVoice.lang;
+    speech.volume = volumeValue;
+    speech.rate = rateValue;
+    speech.pitch = pitchValue;
 
-    newSpeech.onerror = (err) => console.error(err);
-    newSpeech.onstart = () => console.log("start");
-    newSpeech.onpause = () => console.log("pause");
-    newSpeech.onresume = () => console.log("resume");
-    newSpeech.onend = () => console.log("end");
-    //window.speechSynthesis.speak(newSpeech);
-    //console.log(newSpeech);
-    return newSpeech;
+    speech.onerror = (err) => console.error(err);
+    speech.onstart = () => console.log("start");
+    speech.onpause = () => console.log("pause");
+    speech.onresume = () => console.log("resume");
+    speech.onend = () => console.log("end");
+    return speech;
 }
 
 // Pause
