@@ -11,11 +11,10 @@
 
 <body>
     <div class="wrapper">
-        <p>Зачитать текст</p>
+        <button id="clear_Text">Удалить текст</button>
         <textarea class="" cols="30" rows="10" placeholder="Type here..."></textarea>
         <br>
-
-        <select id="voices" class="form-select bg-secondary text-light"></select>
+        <select id="voices"></select>
         <div class="input_container">
             <div>
                 <p class="lead">Volume</p>
@@ -67,6 +66,10 @@
 
     .button_container button{
         width: 100px;
+    }
+
+    #clear_Text{
+        margin-bottom: 15px;
     }
 </style>
 <script src="./main.js" defer></script>

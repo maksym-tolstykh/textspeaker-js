@@ -102,3 +102,8 @@ document.querySelector("#resume").addEventListener("click", () => {
 document.querySelector("#cancel").addEventListener("click", () => {
     window.speechSynthesis.cancel();
 });
+
+//Cleat text button
+document.querySelector("#clear_Text").addEventListener("click",()=>{
+    document.querySelector("textarea").value = "";
+});
